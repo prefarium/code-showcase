@@ -1,0 +1,22 @@
+CommitMsg:
+  TextWidth:
+    enabled: true
+    max_subject_width: 80
+    max_body_width: 120
+    on_warn: fail
+
+  CapitalizedSubject:
+    enabled: true
+    on_warn: fail
+
+PreCommit:
+  RuboCop:
+    enabled: true
+    on_warn: fail
+    command: ['bundle', 'exec', 'rubocop']
+
+  TrailingWhitespace:
+    enabled: true
+
+  YarnCheck:
+    enabled: true

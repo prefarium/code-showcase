@@ -1,0 +1,44 @@
+@import "fonts";
+@import '~vue-multiselect/dist/vue-multiselect.min';
+@import '~vue2-datepicker/scss/index.scss';
+
+$rzd-border-gray: #e6e6e6;
+$rzd-bg-gray: #f4f7fc;
+
+* {
+  font-family: Lato, sans-serif;
+  font-weight: 400;
+}
+
+.custom-bg-gray {
+  background-color: $rzd-bg-gray;
+}
+
+.custom-title {
+  font-family: Lato, sans-serif;
+  font-weight: 700;
+}
+
+.custom-rounded {
+  border-radius: 15px !important;
+}
+
+.custom-border {
+  border-color: $rzd-border-gray !important;
+}
+
+.no-decoration {
+  * {
+    @extend .text-decoration-none;
+    color: black;
+  }
+}
+
+.no-px-for-li {
+  li {
+    @extend .px-0;
+  }
+}
+
+@import "inputs";
+@import "~bootstrap/scss/bootstrap";

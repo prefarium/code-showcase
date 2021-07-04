@@ -1,0 +1,31 @@
+.custom-datepicker {
+  height: 100%;
+  width: 100%;
+
+  .mx-input-wrapper {
+    @extend .mx-input-wrapper;
+    height: 100%;
+    width: 100%;
+
+    ::-webkit-input-placeholder, ::-moz-placeholder {
+      font-family: Lato, sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #787878;
+    }
+
+    .mx-input {
+      @extend .mx-input;
+      height: 100%;
+      width: 100%;
+      border-color: #E8E8E8;
+    }
+  }
+}
+
+.form-control::placeholder {
+  font-family: Lato, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  color: #b7b7b7 !important;
+}

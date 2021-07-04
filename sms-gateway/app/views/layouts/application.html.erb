@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SmsGateway</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_pack_tag 'application', media: 'all' %>
+  <%= javascript_pack_tag 'application' %>
+</head>
+
+<body>
+<%# TODO: transfer log in page into vue component %>
+<% if yield.present? %>
+  <%= yield %>
+<% else %>
+  <div id="vue-app"></div>
+<% end %>
+</body>
+</html>
