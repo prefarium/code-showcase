@@ -1,0 +1,5 @@
+<p>Здравствуйте, <%= @recipient.first_and_middle_names %>!</p>
+<p>
+  <%= @event.author.last_and_first_names %> удалил свой запрос
+  на <%= Event.human_attribute_name("type.#{@event.type}").downcase %>
+</p>

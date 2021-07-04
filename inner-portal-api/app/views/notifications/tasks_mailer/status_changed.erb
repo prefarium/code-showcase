@@ -1,0 +1,11 @@
+<p>Здравствуйте, <%= @recipient.first_and_middle_names %>!</p>
+<p><%= "#{@task.assignee.last_and_first_names} #{@status_in_text[@task.status]} «#{@task.title}»" %><p>
+
+<% if @task.status == 'rejected' %>
+  <p>Причина отказа: <%= @task.reject_reason %></p>
+<% end %>
+
+<p>Нажмите на кнопку, чтобы перейти к этой задаче на внутреннем портале</p>
+<a href=<%= LinkGenerator.task(@task.id) %>>
+  <button><%= TextRandomizer.email_button %></button>
+</a>

@@ -1,0 +1,7 @@
+en:
+  cases:
+    day:
+      zero: days
+      one: day
+      few: days
+      other: days

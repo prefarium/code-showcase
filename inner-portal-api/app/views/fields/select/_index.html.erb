@@ -1,0 +1,2 @@
+<% klass = resource_name == "landing/text" ? Landing::Text : resource_name.to_s.capitalize.constantize %>
+<%= klass.human_attribute_name("#{field.attribute}.#{field.data}") %>

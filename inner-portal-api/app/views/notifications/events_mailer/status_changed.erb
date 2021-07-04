@@ -1,0 +1,9 @@
+<p>Здравствуйте, <%= @recipient.first_and_middle_names %>!</p>
+<p>
+  Ваш запрос на <%= Event.human_attribute_name("type.#{@event.type}").downcase %>
+  <%= @status_in_text[@event.status] %> руководителем
+<p>
+<p>Нажмите на кнопку, чтобы перейти к этому событию на внутреннем портале</p>
+<a href=<%= LinkGenerator.event(@event.id) %>>
+  <button><%= TextRandomizer.email_button %></button>
+</a>

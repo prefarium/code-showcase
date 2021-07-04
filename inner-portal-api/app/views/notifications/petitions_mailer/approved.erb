@@ -1,0 +1,8 @@
+<p>Здравствуйте, <%= @recipient.first_and_middle_names %>!</p>
+<p>Ваше обращение «<%= @petition.title %>» одобрено и отправлено директору</p>
+<p>
+  Как только <%= User.find_director.first_and_middle_names %> рассмотрит его,
+  ответ будет направлен на вашу электронную почту
+</p>
+<p>Текст обращения:</p>
+<p style="white-space: pre-line"><%= @petition.body %></p>

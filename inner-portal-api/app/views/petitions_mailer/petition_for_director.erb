@@ -1,0 +1,6 @@
+<p>Здравствуйте, <%= User.find_director.first_and_middle_names %>!</p>
+<p><%= @petition.author.full_name %> отправил вам следующее обращение:</p>
+<p>---</p>
+<b>«<%= @petition.title %>»</b>
+<p style="white-space: pre-line"><%= @petition.body %></p>
+<p>---</p>

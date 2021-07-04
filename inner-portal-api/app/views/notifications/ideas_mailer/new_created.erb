@@ -1,0 +1,15 @@
+<p>Здравствуйте, <%= @recipient.first_and_middle_names %>!</p>
+<p>
+  <%= @idea.author.last_and_first_names %> предложил новую идею «<%= @idea.title %>» на внутреннем портале
+</p>
+
+<% if @idea.description.present? %>
+  <p>Вот как он её описывает:</p>
+  <p style="white-space: pre-line"><%= @idea.description %></p>
+<% end %>
+
+<p>Голосование продлится до <%= @idea.end_date.strftime('%d.%m.%Y') %></p>
+<p>Нажмите на кнопку, чтобы перейти к идее</p>
+<a href=<%= LinkGenerator.idea(@idea.id) %>>
+  <button><%= TextRandomizer.email_button %></button>
+</a>

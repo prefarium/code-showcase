@@ -1,0 +1,1806 @@
+---
+openapi: 3.0.1
+info:
+  title: API
+  version: v1
+paths:
+  "/landing/competences":
+    get:
+      summary: список компетенций
+      tags:
+      - Лэндинг
+      parameters:
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: массив с компетенциями
+  "/landing/header_cards":
+    get:
+      summary: список карточек для хэдера
+      tags:
+      - Лэндинг
+      responses:
+        '200':
+          description: массив карточек
+  "/landing/history_marks":
+    get:
+      summary: список исторических отметок
+      tags:
+      - Лэндинг
+      responses:
+        '200':
+          description: массив с отметками
+  "/landing/members":
+    get:
+      summary: список членов команды
+      tags:
+      - Лэндинг
+      responses:
+        '200':
+          description: массив людей
+  "/landing/news":
+    get:
+      summary: список новостей
+      tags:
+      - Лэндинг
+      parameters:
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: массив новостей
+  "/landing/project_groups":
+    get:
+      summary: список групп проектов
+      tags:
+      - Лэндинг
+      responses:
+        '200':
+          description: группы
+  "/landing/project_groups/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID группы проектов
+      schema:
+        type: integer
+    get:
+      summary: конкретная группа
+      tags:
+      - Лэндинг
+      responses:
+        '200':
+          description: проект
+  "/landing/projects":
+    get:
+      summary: список проектов
+      tags:
+      - Лэндинг
+      parameters:
+      - name: show_on_root
+        in: query
+        required: false
+        description: Нужно ли вернуть только те проекты, которые должны отображаться
+          на главной
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: массив проектов
+  "/landing/projects/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID проекта
+      schema:
+        type: integer
+    get:
+      summary: конкретный проект
+      tags:
+      - Лэндинг
+      responses:
+        '200':
+          description: проект
+  "/landing/texts":
+    get:
+      summary: тексты для разных разделов
+      tags:
+      - Лэндинг
+      responses:
+        '200':
+          description: объект с текстами
+  "/v1/password/new":
+    get:
+      summary: сброс пароля
+      tags:
+      - Аутентификация
+      parameters:
+      - name: email
+        in: query
+        required: true
+        description: Email
+        schema:
+          type: string
+      responses:
+        '204':
+          description: отправлено письмо для восстановления
+  "/v1/password":
+    post:
+      summary: установка нового пароля
+      tags:
+      - Аутентификация
+      parameters: []
+      responses:
+        '200':
+          description: пароль изменён
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: Токен для сброса пароля
+                password:
+                  type: string
+                  description: Пароль
+              required:
+              - token
+              - password
+  "/v1/refresh":
+    post:
+      summary: обновление access-токена
+      tags:
+      - Аутентификация
+      security:
+      - Refresh: []
+      responses:
+        '200':
+          description: access-токен обновлён
+  "/v1/login":
+    post:
+      summary: аутентификация
+      tags:
+      - Аутентификация
+      parameters: []
+      responses:
+        '200':
+          description: авторизован
+        '401':
+          description: неверный логин или пароль
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email
+                password:
+                  type: string
+                  description: Пароль
+              required:
+              - email
+              - password
+  "/v1/logout":
+    delete:
+      summary: выход из лк
+      tags:
+      - Аутентификация
+      security:
+      - Refresh: []
+      responses:
+        '204':
+          description: разлогинен
+  "/v1/birthdays":
+    get:
+      summary: дни рождения коллег за период
+      tags:
+      - Дни рождения
+      parameters:
+      - name: month
+        in: query
+        required: false
+        description: Месяц, за который требуется отобразить дни рождения. По умолчанию
+          используется текущий
+        schema:
+          type: integer
+      - name: day
+        in: query
+        default:
+        required: false
+        description: День, за который требуется отобразить дни рождения
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        default:
+        required: false
+        description: Сколько записей требуется вернуть
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список имениннков
+  "/v1/birthdays/upcoming":
+    get:
+      summary: грядущие дни рождения коллег
+      tags:
+      - Дни рождения
+      parameters:
+      - name: number_of_birthdays
+        in: query
+        default: 6
+        required: false
+        description: Количество коллег с ближайшими днями рождения
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список имениннков
+  "/v1/bot/send_invites":
+    post:
+      summary: рассылка приглашений
+      tags:
+      - Телеграм-бот
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: отправлены
+        '403':
+          description: недостаточно прав
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                link:
+                  type: string
+                  description: Ссылка на чат в телеге
+                user_ids:
+                  type: array
+                  description: ID приглашаемых
+                  items:
+                    type: integer
+                birthday_man_id:
+                  type: integer
+                  description: ID именинника
+              required:
+              - link
+              - user_ids
+              - birthday_man_id
+  "/v1/calendar":
+    get:
+      summary: календарь
+      tags:
+      - События
+      parameters:
+      - name: user_id
+        in: query
+        required: false
+        description: ID пользователя, чьи события требуется вернуть. Если не передано,
+          используется ID текущего пользователя
+        schema:
+          type: integer
+      - name: for_division
+        in: query
+        default: false
+        required: false
+        description: Требуется ли вернуть события всех работников подразделения
+        schema:
+          type: boolean
+      - name: filter
+        in: query
+        default: all
+        required: false
+        examples:
+          assigned:
+            summary: является участником
+            value: assigned
+          created:
+            summary: является автором
+            value: created
+          all:
+            summary: является или тем, или другим
+            value: all
+        description: Тип связи пользователя и событий
+        schema:
+          type: string
+      - name: common
+        in: query
+        default: true
+        required: false
+        description: Требуется ли включить в ответ общие события
+        schema:
+          type: boolean
+      - name: month
+        in: query
+        required: false
+        description: Месяц на календаре. Если не передан, используется текущий
+        schema:
+          type: integer
+      - name: year
+        in: query
+        required: false
+        description: Год на календаре. Если не передан, используется текущий
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: флаг __FORBIDDEN__
+        '403':
+          description: запрещено использовать переданные параметры
+  "/v1/current/avatar":
+    put:
+      summary: обновление аватара
+      tags:
+      - Текущий пользователь
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: обновлён
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  description: Аватар
+                  format: binary
+              required:
+              - avatar
+  "/v1/current/dashboard":
+    get:
+      summary: текущие настройки дэшборда
+      tags:
+      - Текущий пользователь
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список настроек
+    put:
+      summary: обновление настроек дэшборда
+      tags:
+      - Текущий пользователь
+      parameters:
+      - in: query
+        name: tasks
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: events
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: birthdays
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: news
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: today
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: ideas
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: petitions
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: documents
+        required: false
+        schema:
+          type: boolean
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: обновлено
+  "/v1/current/password":
+    put:
+      summary: изменение пароля
+      tags:
+      - Текущий пользователь
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: изменён
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: Пароль
+              required:
+              - password
+  "/v1/current/settings":
+    put:
+      summary: обновление настроек
+      tags:
+      - Текущий пользователь
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: обновлено
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      description: Электронная почта
+                    phone:
+                      type: string
+                      description: Номер телефона
+                    actual_position:
+                      type: string
+                      description: Фактическая должность
+                    telegram:
+                      type: string
+                      description: Имя пользователя в телеге
+                notification_setting:
+                  type: object
+                  properties:
+                    email:
+                      type: boolean
+                      description: Получать ли уведомления на почту
+                    browser:
+                      type: boolean
+                      description: Получать ли уведомления в браузере
+  "/v1/current/user":
+    get:
+      summary: получение информации о текущем пользователе
+      tags:
+      - Текущий пользователь
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: инфа подъехала
+  "/v1/documents":
+    get:
+      summary: список
+      tags:
+      - Документы
+      parameters:
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список документов
+  "/v1/events":
+    get:
+      summary: список событий
+      tags:
+      - События
+      parameters:
+      - name: user_id
+        in: query
+        required: false
+        description: ID пользователя, чьи события требуется вернуть. Если не передано,
+          используется ID текущего пользователя
+        schema:
+          type: integer
+      - name: for_division
+        in: query
+        default: false
+        required: false
+        description: Требуется ли вернуть события всех работников подразделения
+        schema:
+          type: boolean
+      - name: filter
+        in: query
+        default: all
+        required: false
+        examples:
+          assigned:
+            summary: является участником
+            value: assigned
+          created:
+            summary: является автором
+            value: created
+          all:
+            summary: является или тем, или другим
+            value: all
+        description: Тип связи пользователя и событий
+        schema:
+          type: string
+      - name: common
+        in: query
+        default: true
+        required: false
+        description: Требуется ли включить в ответ общие события
+        schema:
+          type: boolean
+      - name: date
+        in: query
+        format: date
+        required: false
+        description: Дата, за которую нужно вернуть события. Если не передана, используется
+          текущая
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      - name: search_query
+        in: query
+        required: false
+        description: Поисковый запрос
+        schema:
+          type: string
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список событий
+    post:
+      summary: создание
+      tags:
+      - События
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: создано
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                properties:
+                  confirmable:
+                    type: boolean
+                    description: Требуется ли согласование. Только true
+                    default: true
+                  type:
+                    type: string
+                    description: Тип. Эндпоинт с вариантами лежит в селекторах
+                  description:
+                    type: string
+                    description: Описание
+                  start_time:
+                    type: string
+                    description: Время начала
+                    format: date-time
+                  end_time:
+                    type: string
+                    description: Время окончания
+                    format: date-time
+                required:
+                - confirmable
+                - type
+                - start_time
+                - end_time
+              - type: object
+                properties:
+                  confirmable:
+                    type: boolean
+                    description: Требуется ли согласование. Только false
+                    default: false
+                  title:
+                    type: string
+                    description: Заголовок
+                  description:
+                    type: string
+                    description: Описание
+                  start_time:
+                    type: string
+                    description: Время начала
+                    format: date-time
+                  end_time:
+                    type: string
+                    description: Время окончания
+                    format: date-time
+                  for_division:
+                    type: integer
+                    description: Флаг, что событие нужно создать для всего подразделения
+                required:
+                - confirmable
+                - title
+                - start_time
+                - end_time
+                - for_division
+              - type: object
+                properties:
+                  confirmable:
+                    type: boolean
+                    description: Требуется ли согласование. Только false
+                    default: false
+                  title:
+                    type: string
+                    description: Заголовок
+                  description:
+                    type: string
+                    description: Описание
+                  start_time:
+                    type: string
+                    description: Время начала
+                    format: date-time
+                  end_time:
+                    type: string
+                    description: Время окончания
+                    format: date-time
+                  participant_ids:
+                    type: array
+                    description: ID участников
+                    items:
+                      type: integer
+                required:
+                - confirmable
+                - title
+                - start_time
+                - end_time
+                - participant_ids
+  "/v1/events/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID
+      schema:
+        type: integer
+    get:
+      summary: просмотр
+      tags:
+      - События
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: событие
+        '403':
+          description: нет доступа
+    put:
+      summary: редактирование
+      tags:
+      - События
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: обновлён
+        '403':
+          description: нет доступа
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Заголовок
+                description:
+                  type: string
+                  description: Описание
+    delete:
+      summary: удаление
+      tags:
+      - События
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: удалено
+        '403':
+          description: нет доступа
+  "/v1/events/{id}/update_status":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID
+      schema:
+        type: integer
+    put:
+      summary: обновление статуса
+      tags:
+      - События
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: обновлён
+        '403':
+          description: нет доступа
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: 'Новый статус. Варианты: approved, denied'
+              required:
+              - status
+  "/v1/events/waiting_for_confirmation":
+    get:
+      summary: события, ожидающие подтверждения
+      tags:
+      - События
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: __FORBIDDEN__
+  "/v1/events/processed":
+    get:
+      summary: обработанные события (те, на которые начальник отреагировал)
+      tags:
+      - События
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: __FORBIDDEN__
+  "/v1/feedback":
+    post:
+      summary: создание
+      tags:
+      - Обратная связь
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: отправлено
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  description: Содержание
+                file:
+                  type: string
+                  description: Файл
+                  format: binary
+              required:
+              - body
+  "/v1/header/notification_numbers":
+    get:
+      summary: цифры для хэдера
+      tags:
+      - Текущий пользователь
+      parameters:
+      - name: number_of_days
+        in: query
+        default: 7
+        required: false
+        description: Количество ближайших дней, за которые требуется учесть дни рождения
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: цифры для хэдера
+  "/v1/ideas":
+    get:
+      summary: список незакреплённых
+      tags:
+      - Идеи
+      parameters:
+      - name: user_id
+        in: query
+        required: false
+        description: ID пользователя, чьи идеи будут возвращены. По умолчанию используется
+          текущий пользователь
+        schema:
+          type: integer
+      - name: for_division
+        in: query
+        default: true
+        required: false
+        description: Требуется ли вернуть идеи подразделения, в котором работает владелец
+          user_id
+        schema:
+          type: boolean
+      - name: filter
+        in: query
+        default: active
+        required: false
+        description: Статус возвращаемых идей
+        examples:
+          active:
+            summary: голосование идёт
+            value: active
+          ended:
+            summary: голосование закончилось
+            value: ended
+          approved:
+            summary: одобренные
+            value: approved
+          denied:
+            summary: отклонённые
+            value: denied
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список событий
+    post:
+      summary: создание
+      tags:
+      - Идеи
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: создана
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Заголовок
+                description:
+                  type: string
+                  description: Описание
+                end_date:
+                  type: string
+                  description: Дата окончания голосования
+                  format: date
+              required:
+              - title
+              - end_date
+  "/v1/ideas/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID
+      schema:
+        type: integer
+    get:
+      summary: просмотр
+      tags:
+      - Идеи
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: идея
+        '403':
+          description: нет доступа
+  "/v1/ideas/pinned":
+    get:
+      summary: список закреплённых
+      tags:
+      - Идеи
+      parameters:
+      - name: filter
+        in: query
+        default: active
+        required: false
+        description: Статус возвращаемых идей
+        examples:
+          active:
+            summary: голосование идёт
+            value: active
+          ended:
+            summary: голосование закончилось
+            value: ended
+          approved:
+            summary: одобренные
+            value: approved
+          denied:
+            summary: отклонённые
+            value: denied
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список закреплённых идей
+  "/v1/ideas/aside":
+    get:
+      summary: список для бокового блока
+      tags:
+      - Идеи
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список для бокового блока
+  "/v1/ideas/search":
+    get:
+      summary: поиск
+      tags:
+      - Идеи
+      parameters:
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      - name: search_query
+        in: query
+        required: false
+        description: Поисковый запрос
+        schema:
+          type: string
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список найденных идей
+  "/v1/news":
+    get:
+      summary: список
+      tags:
+      - Новости
+      parameters:
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: спикок новостей
+    post:
+      summary: предложение новой
+      tags:
+      - Новости
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: отправлено на рассмотрение
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Заголовок
+                body:
+                  type: string
+                  description: Содержание
+                date:
+                  type: string
+                  description: Желаемая дата публикации
+                  format: date
+                image:
+                  type: image
+                  description: Изображение
+                  format: binary
+              required:
+              - title
+              - body
+              - date
+  "/v1/news/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID
+      schema:
+        type: integer
+    get:
+      summary: просмотр
+      tags:
+      - Новости
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: новость
+  "/v1/notifications":
+    get:
+      summary: список
+      tags:
+      - Центр уведомлений
+      parameters:
+      - name: notifiable_type
+        in: query
+        required: false
+        examples:
+          all:
+            summary: все
+            value:
+          task:
+            summary: задачи
+            value: Task
+          event:
+            summary: события
+            value: Event
+          idea:
+            summary: идеи
+            value: Idea
+        description: Тип уведомлений. Если ничего не передано, вернутся все
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список уведомлений
+    put:
+      summary: пометка уведомлений прочитанными
+      tags:
+      - Центр уведомлений
+      parameters:
+      - name: notifiable_type
+        in: query
+        required: false
+        examples:
+          all:
+            summary: все
+            value:
+          task:
+            summary: задачи
+            value: Task
+          event:
+            summary: события
+            value: Event
+          idea:
+            summary: идеи
+            value: Idea
+        description: Тип уведомлений. Если ничего не передано, будут помечены все
+        schema:
+          type: string
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: помечено
+    delete:
+      summary: очистить центр уведомлений
+      tags:
+      - Центр уведомлений
+      parameters:
+      - name: notifiable_type
+        in: query
+        required: false
+        examples:
+          all:
+            summary: все
+            value:
+          task:
+            summary: задачи
+            value: Task
+          event:
+            summary: события
+            value: Event
+          idea:
+            summary: идеи
+            value: Idea
+        description: Тип уведомлений. Если ничего не передано, удалятся все
+        schema:
+          type: string
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: очищено
+  "/v1/petitions":
+    post:
+      summary: создание
+      tags:
+      - Обращения
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: отправлено на рассмотрение
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Заголовок
+                body:
+                  type: string
+                  description: Суть
+              required:
+              - title
+              - body
+  "/v1/pins":
+    post:
+      summary: закрепить
+      tags:
+      - Идеи
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: закреплено
+        '403':
+          description: нет доступа
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: ID идеи
+              required:
+              - id
+  "/v1/pins/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID идеи
+      schema:
+        type: string
+    delete:
+      summary: открепление
+      tags:
+      - Идеи
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: откреплено
+  "/v1/selectors/event_types":
+    get:
+      summary: типы событий
+      tags:
+      - Селекторы
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список типов событий
+  "/v1/selectors/possible_assignees":
+    get:
+      summary: список тех, для кого можно создавать события и задачи
+      tags:
+      - Селекторы
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список тех, для кого можно создавать события и задачи
+  "/v1/survey":
+    get:
+      summary: текущий
+      tags:
+      - Опросы
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: текущий опрос
+  "/v1/tasks/archive":
+    get:
+      summary: архив
+      tags:
+      - Задачи
+      parameters:
+      - name: filter
+        in: query
+        default: assigned
+        required: false
+        examples:
+          assigned:
+            summary: является исполнителем
+            value: assigned
+          created:
+            summary: является автором
+            value: created
+          all:
+            summary: является или тем, или другим
+            value: all
+        description: Тип связи пользователя и задач
+        schema:
+          type: string
+      - name: sorting_field
+        in: query
+        default: deadline
+        required: false
+        examples:
+          title:
+            summary: по заголовку
+            value: title
+          deadline:
+            summary: по дэдлайну
+            value: deadline
+          status:
+            summary: по статусу
+            value: status
+        description: Поле сортировки
+        schema:
+          type: string
+      - name: sorting_direction
+        in: query
+        default: desc
+        required: false
+        examples:
+          desc_example:
+            summary: по убыванию
+            value: desc
+          asc_example:
+            summary: по возврастанию
+            value: asc
+        description: Направление сортировки
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      - name: search_query
+        in: query
+        required: false
+        description: Поисковый запрос
+        schema:
+          type: string
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список задач
+  "/v1/tasks/archive/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID
+      schema:
+        type: integer
+    get:
+      summary: просмотр архивной задачи
+      tags:
+      - Задачи
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: задача
+        '403':
+          description: нет доступа
+  "/v1/tasks":
+    get:
+      summary: список
+      tags:
+      - Задачи
+      parameters:
+      - name: user_id
+        in: query
+        required: false
+        description: ID пользователя, чьи задачи будут возвращены. Если не передан,
+          используется ID текущего пользователя
+        schema:
+          type: integer
+      - name: filter
+        in: query
+        default: assigned
+        required: false
+        examples:
+          assigned:
+            summary: является исполнителем
+            value: assigned
+          created:
+            summary: является автором
+            value: created
+          all:
+            summary: является или тем, или другим
+            value: all
+        description: Тип связи пользователя и задач
+        schema:
+          type: string
+      - name: sorting_field
+        in: query
+        default: deadline
+        required: false
+        examples:
+          title:
+            summary: по заголовку
+            value: title
+          deadline:
+            summary: по дэдлайну
+            value: deadline
+          status:
+            summary: по статусу
+            value: status
+        description: Поле сортировки
+        schema:
+          type: string
+      - name: sorting_direction
+        in: query
+        default: desc
+        required: false
+        examples:
+          desc_example:
+            summary: по убыванию
+            value: desc
+          asc_example:
+            summary: по возврастанию
+            value: asc
+        description: Направление сортировки
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      - name: search_query
+        in: query
+        required: false
+        description: Поисковый запрос
+        schema:
+          type: string
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список задач
+    post:
+      summary: создание
+      tags:
+      - Задачи
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: создана
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Заголовок
+                deadline:
+                  type: string
+                  description: Дэдлайн
+                  format: date
+                description:
+                  type: string
+                  description: Описание
+                assignee_id:
+                  type: integer
+                  description: ID исполнителя
+              required:
+              - title
+              - assignee_id
+  "/v1/tasks/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID
+      schema:
+        type: integer
+    get:
+      summary: просмотр
+      tags:
+      - Задачи
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: задача
+        '403':
+          description: нет доступа
+    put:
+      summary: редактирование
+      tags:
+      - Задачи
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: отредактирована
+        '403':
+          description: нет доступа
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Заголовок
+                deadline:
+                  type: string
+                  description: Дэдлайн
+                  format: date
+                description:
+                  type: string
+                  description: Описание
+    delete:
+      summary: удаление
+      tags:
+      - Задачи
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: удалена
+        '403':
+          description: нет доступа
+  "/v1/tasks/{id}/update_status":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID
+      schema:
+        type: integer
+    put:
+      summary: обновление статуса
+      tags:
+      - Задачи
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: обновлён
+        '403':
+          description: нет доступа
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: 'Статус задачи. Варианты: rejected, in_progress, paused,
+                    completed'
+                reject_reason:
+                  type: string
+                  description: Причина отказа. Указывается при статусе rejected
+              required:
+              - status
+  "/v1/users":
+    get:
+      summary: список
+      tags:
+      - Пользователи
+      parameters:
+      - name: filter
+        in: query
+        default: all
+        required: false
+        examples:
+          all:
+            summary: все
+            value: all
+          managers:
+            summary: руководители подразделений
+            value: managers
+        description: Тип возвращаемых пользователей
+        schema:
+          type: string
+      - name: division_id
+        in: query
+        required: false
+        description: ID подразделения, работников которого требуется вернуть
+        schema:
+          type: integer
+      - name: sorting_field
+        in: query
+        default: date
+        required: false
+        examples:
+          name:
+            summary: по имени
+            value: name
+          division:
+            summary: по подразделению
+            value: division
+          position:
+            summary: по должности
+            value: position
+          email:
+            summary: по электронной почте
+            value: email
+          phone:
+            summary: по номеру телефона
+            value: phone
+        description: Поле сортировки
+        schema:
+          type: string
+      - name: sorting_direction
+        in: query
+        default: desc
+        required: false
+        examples:
+          desc:
+            summary: по убыванию
+            value: desc
+          asc:
+            summary: по возврастанию
+            value: asc
+        description: Направление сортировки
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        default: 1
+        description: Номер страницы
+        schema:
+          type: integer
+      - name: entities_on_page
+        in: query
+        required: false
+        default: '10'
+        description: Количество записей на 1 странице
+        schema:
+          type: integer
+      - name: search_query
+        in: query
+        required: false
+        description: Поисковый запрос
+        schema:
+          type: string
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: список пользователей
+  "/v1/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID
+      schema:
+        type: string
+    get:
+      summary: профиль
+      tags:
+      - Пользователи
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: страница пользователя
+  "/v1/ideas/{id}/vote":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID идеи
+      schema:
+        type: string
+    put:
+      summary: голосование
+      tags:
+      - Идеи
+      parameters: []
+      security:
+      - Bearer: {}
+      responses:
+        '204':
+          description: голос отдан
+        '403':
+          description: нет доступа
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vote:
+                  type: string
+                  description: 'Голос: like, dislike'
+              required:
+              - vote
+servers:
+- url: https://__deleted__/api
+- url: http://localhost:3000
+components:
+  securitySchemes:
+    Bearer:
+      description: Access token
+      type: apiKey
+      name: Authorization
+      in: header
+    Refresh:
+      description: Refresh token
+      type: apiKey
+      name: X-Refresh-Token
+      in: header

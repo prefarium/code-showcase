@@ -1,0 +1,10 @@
+<dt class="attribute-label">
+  Файл
+</dt>
+<dd class="attribute-data attribute-data--string">
+  <% if page.resource.file.attached? %>
+    <%= link_to page.resource.file.filename, rails_blob_path(page.resource.file, disposition: :attachment) %>
+  <% else %>
+    Отсутствует
+  <% end %>
+</dd>

@@ -1,0 +1,67 @@
+ru:
+  activerecord:
+    attributes:
+      landing/header:
+        title: Заголовок
+        text: Текст
+
+      landing/competence:
+        icon: Иконка
+        image: Изображение
+        title: Заголовок
+        text: Текст
+
+      landing/project_group:
+        title: Заголовок
+        subtitle: Подзаголовок
+        text_on_cover: Текст на обложке
+        cover: Обложка
+        projects: Проекты
+        landing_project_ids: Проекты
+        order_number: Порядковый номер
+
+      landing/bind:
+        competence: Компетенция
+        landing_competence_id: Компетенция
+        project: Проект
+        landing_project_id: Проект
+
+      landing/group_bind:
+        competence: Компетенция
+        landing_competence_id: Компетенция
+        project_group: Группа проектов
+        landing_project_group_id: Группа проектов
+
+      landing/member:
+        avatar: Аватар
+        name: Имя
+        position: Должность
+        quote: Цитата
+        text: Текст
+
+      landing/history_mark:
+        year: Год
+        text: Текст
+
+      landing/header_card:
+        title: Заголовок
+        subtitle: Подзаголовок
+
+      landing/project:
+        title: Заголовок
+        subtitle: Подзаголовок
+        text_on_cover: Текст на обложке
+        cover: Обложка
+        text: Текст
+        project_group: Группа проекта
+        landing_project_group_id: Группа проекта
+        show_on_root: Отобразить проект на главной
+        order_number: Порядковый номер
+
+      landing/text:
+        section_name: Раздел
+        text: Текст
+      landing/text/section_name:
+        about_us: О нас
+        header_text: Текст хэдера
+        about_portal: О портале

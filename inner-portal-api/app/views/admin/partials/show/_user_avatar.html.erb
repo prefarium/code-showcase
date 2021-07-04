@@ -1,0 +1,12 @@
+<dt class="attribute-label">
+  Аватар
+</dt>
+<dd class="attribute-data attribute-data--string">
+  <% if page.resource.avatar.attached? %>
+    <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden">
+      <img src="<%= blob_url_for(page.resource.avatar) %>" alt="" class="display: block; width: 100%">
+    </div>
+  <% else %>
+    Отсутствует
+  <% end %>
+</dd>

@@ -1,0 +1,12 @@
+<p>Здравствуйте, <%= @recipient.first_and_middle_names %>!</p>
+<p>Ваше обращение «<%= @petition.title %>» отклонено и не отправлено директору</p>
+
+<% if @petition.denial_reason.present? %>
+  <p>Причина отказа:</p>
+  <p style="white-space: pre-line"><%= @petition.denial_reason %></p>
+<% else %>
+  <p>Причина отказа не указана</p>
+<% end %>
+
+<p>Текст обращения:</p>
+<p style="white-space: pre-line"><%= @petition.body %></p>

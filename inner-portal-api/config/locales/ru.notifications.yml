@@ -1,0 +1,60 @@
+ru:
+  notifications:
+    task:
+      new_assigned:
+        title: Время действовать!
+        body: 'Вам назначена новая задача «%{title}»'
+      in_progress:
+        title: Задача взята в работу
+        body: 'Работа над задачей «%{title}» началась. Исполнитель: %{assignee_name}'
+      paused:
+        title: Задача поставлена на паузу
+        body: 'Работа над задачей «%{title}» остановлена. Исполнитель: %{assignee_name}'
+      completed:
+        title: Задача выполнена
+        body: 'Работа над задачей «%{title}» завершена. Исполнитель: %{assignee_name}'
+      rejected:
+        title: Отказ от задачи
+        body: 'Задача «%{title}» отклонена. Исполнитель: %{assignee_name}'
+      canceled:
+        title: Задача отменена
+        body: 'Задача «%{title}» отменена'
+    event:
+      common:
+        new_assigned:
+          title: Новое событие
+          body: 'Создано новое общее событие «%{title}». Дата проведения: %{dates}'
+        canceled:
+          title: Событие отменено
+          body: 'Общее событие «%{title}» для сотрудников отменено'
+      confirmable:
+        new_assigned:
+          title: Новое событие на согласование
+          body: 'Согласуйте новое событие «%{type}». Сотрудник: %{author_name}'
+        approved:
+          title: Событие согласовано
+          body: 'Руководитель согласовал ваше событие «%{type}» на %{dates}'
+        denied:
+          title: Событие отклонено
+          body: 'Руководитель отклонил ваше событие «%{type}» на %{dates}'
+        canceled:
+          title: Запрос на согласование отменен
+          body: 'Запрос на согласование события «%{type}» удален. Сотрудник: %{author_name}'
+      not_confirmable:
+        new_assigned:
+          title: Новое событие
+          body: 'Для вас создано новое событие: «%{title}». Автор: %{author_name}'
+        canceled:
+          title: Событие отменено
+          body: 'Событие «%{title}» отменено'
+    idea:
+      new_created:
+        title: Голосование началось!
+        body: '%{author_name} предлагает новую идею: «%{title}»'
+      voting_ended:
+        for_author:
+          title: Голосование за вашу идею завершено!
+          body: 'Результаты голосования по идее «%{title}»: «За» — %{total_likes}, «Против» — %{total_dislikes}'
+        for_colleagues:
+          title: Голосование за идею завершено
+          body: 'Результаты голосования по идее «%{title}»: «За» — %{total_likes}, «Против» — %{total_dislikes}'

@@ -1,0 +1,43 @@
+en:
+  errors:
+    authentication:
+      incorrect_credentials: Incorrect login or password
+      user_not_found: Cannot find user with specified email
+      link_expired: The link has expired - request a new one
+      incorrect_reset_token: Error. Request new link
+    birthdays:
+      unexpected_day_class: 'Day might be only Integer or Range but got %{class_name}'
+    common:
+      not_authorized: Authorization required
+      forbidden_image_type: 'Allowed image types: %{image_types}'
+    documents:
+      file_not_attached: File not attached
+    events:
+      forbidden_to_read: You cannot read this event
+      forbidden_audience: You cannot create events for this audience
+      forbidden_to_update: You cannot change this event
+      forbidden_to_delete: You cannot delete this event
+      forbidden_params: You cannot use these filters
+      not_updatable_status: The event does not support status changing
+      division_and_participants_incompatible: Select only divisions or only participants
+      missing_participants: Specify division ids or participant ids
+    ideas:
+      already_liked: Already liked
+      already_disliked: Already disliked
+      already_pinned: The idea is already pinned
+      cannot_pin: You can зшт only colleagues' or subordinates' ideas
+      cannot_read: You can read only colleagues' or subordinates' ideas
+      cannot_vote: You can vote only for colleagues' or subordinates' ideas
+      not_pinned: The idea is not pinned
+      unprocessable_vote: Unknown vote type
+    tasks:
+      forbidden_to_read: You can access only colleagues' or subordinates' tasks
+      forbidden_to_assign: You cannot assign the task to the selected user
+      forbidden_to_update: You cannot change this task
+      forbidden_to_delete: You cannot delete this task
+      assigned_status_not_allowed: The status is available only for newly created tasks
+    users:
+      incorrect_filter: 'Incorrect filter. Available: %{filters}'
+      incorrect_sorting_field: 'Incorrect sorting field. Available: %{fields}'
+    validations:
+      incorrect_format: has incorrect format

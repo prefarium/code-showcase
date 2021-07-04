@@ -1,0 +1,6 @@
+<p>Заголовок: <%= @petition.title %></p>
+<p>Суть:</p>
+<p style="white-space: pre-line"><%= @petition.body %></p>
+<a href=<%= LinkGenerator.petition(@petition.id) %>>
+  <button>К обращению!</button>
+</a>

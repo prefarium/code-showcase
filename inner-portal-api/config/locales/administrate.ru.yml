@@ -1,0 +1,36 @@
+---
+ru:
+  administrate:
+    actions:
+      confirm: Вы уверены?
+      destroy: Удалить
+      ban: Забанить
+      archive: Архивировать
+      restore: Восстановить
+      edit: Редактировать
+      edit_resource: Редактировать
+      show_resource: "%{name}"
+      new_resource: Добавить
+      back: Вернуться назад
+    controller:
+      create:
+        success: Успешно создано
+      destroy:
+        success: Успешно удалено
+      restore:
+        success: Успешно восстановлен
+        failure: Восстановление не удалось
+      update:
+        success: Обновлено успешно
+    fields:
+      has_many:
+        more: "%{count} из %{total_count}"
+        none: Нет
+    form:
+      error: Ошибка
+      errors: "При сохранении произошли ошибки:"
+    navigation:
+      back_to_app: Вернуться в приложение
+    search:
+      clear: Очистить поиск
+      label: Поиск %{resource}

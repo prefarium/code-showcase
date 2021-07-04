@@ -1,0 +1,8 @@
+<p>Здравствуйте, <%= @recipient.first_and_middle_names %>!</p>
+<p>
+  Вам назначена новая задача «<%= @task.title %>» на внутреннем портале.
+  Нажмите на кнопку, чтобы перейти на сайт и узнать подробности
+</p>
+<a href=<%= LinkGenerator.task(@task.id) %>>
+  <button><%= TextRandomizer.email_button %></button>
+</a>

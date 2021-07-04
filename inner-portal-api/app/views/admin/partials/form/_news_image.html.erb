@@ -1,0 +1,25 @@
+<div class="field-unit field-unit--string">
+  <div class="field-unit__label">
+    <label for="">
+      Изображение
+    </label>
+  </div>
+  <div class="field-unit__field">
+    <% if page.resource.image.attached? %>
+      <img src="<%= blob_url_for(page.resource.image) %>" alt="">
+    <% else %>
+      Отсутствует
+    <% end %>
+  </div>
+</div>
+
+<div class="field-unit field-unit--string">
+  <div class="field-unit__label">
+    <label for="">
+      Загрузить изображение
+    </label>
+  </div>
+  <div class="field-unit__field">
+    <%= f.file_field :image %>
+  </div>
+</div>

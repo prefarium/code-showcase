@@ -1,0 +1,11 @@
+development:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") %>
+
+test:
+  adapter: test
+
+production:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") %>
+  channel_prefix: inner_portal_api_production

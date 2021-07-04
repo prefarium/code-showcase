@@ -1,0 +1,162 @@
+ru:
+  activerecord:
+    attributes:
+      control:
+        division: Подразделение
+        division_id: Подразделение
+        manager: Руководитель
+        manager_id: Руководитель
+
+      dashboard:
+        birthdays: Дни рождения
+        documents: Документы
+        events: События
+        ideas: Идеи
+        news: Новости
+        petitions: Обращения
+        tasks: Задачи
+        today: Блок "сегодня"
+        user: Пользователь
+
+      division:
+        employees: Фактические работники
+        paper_employees: Работники по документам
+        managers: Управляющие
+        name: Название
+
+      document:
+        name: Название
+        updated_at: Дата создания/обновления
+
+      event:
+        author: Автор
+        confirmable: Необходимость подтверждения
+        description: Описание
+        division: Подразделение
+        end_time: Время завершения
+        start_time: Время начала
+        status: Статус
+        title: Заголовок
+        type: Тип
+        type_in_russian: Тип (на русском)
+      event/status:
+        approved: Одобрено
+        common: Общее
+        denied: Отклонено
+        pending: Ожидайте
+      event/type:
+        day_off: Отгул
+        scheduled_vacation: Отпуск по графику
+        work_from_home: Работа из дома
+
+      feedback:
+        body: Содержание
+        author: Автор
+        status: Статус
+        created_at: Дата создания
+        updated_at: Дата последнего изменения
+      feedback/status:
+        new_one: Новое
+        resolved: Обработано
+
+      idea:
+        author: Автор
+        description: Описание
+        division: Подразделение
+        end_date: Дата завершения
+        status: Статус
+        title: Заголовок
+      idea/status:
+        active: На голосовании
+        approved: Одобрена
+        denied: Отклонена
+
+      news:
+        author: Автор
+        body: Содержание
+        date: Желаемая дата публикации
+        status: Статус
+        title: Заголовок
+        for_landing: Отображать на лэндинге
+        for_portal: Отображать на портале
+      news/status:
+        archived: В архиве
+        created: Ожидает рассмотрения
+        published: Опубликована
+
+      participation:
+        event: Событие
+        participant: Участник
+
+      petition:
+        author: Автор
+        body: Содержание
+        title: Заголовок
+        status: Статус
+        denial_reason: Причина отказа
+      petition/status:
+        approved: Одобрено
+        created: Создано
+        denied: Отклонено
+
+      pin:
+        idea: Идея
+        pinner: Закрепитель
+
+      position:
+        employees: Работники
+        name: Название
+
+      survey:
+        body: Содержимое
+        link: Ссылка
+        name: Название
+        status: Статус
+        title: Заголовок
+      survey/status:
+        archived: В архиве
+        current: Опубликовано
+        ready: Готово к публикации
+
+      task:
+        assignee: Исполнитель
+        author: Автор
+        deadline: Срок сдачи
+        description: Описание
+        reject_reason: Причина отказа
+        status: Статус
+        title: Заголовок
+      task/status:
+        rejected: Отклонена
+        assigned: Назначена
+        in_progress: В работе
+        paused: На паузе
+        completed: Завершена
+
+      telegram_account:
+        user: Пользователь
+        username: Имя пользователя
+        chat_id: ID чата
+
+      user:
+        paper_division: Подразделение по документам
+        paper_division_id: Подразделение по документам
+        division: Фактическое подразделение
+        division_id: Фактическое подразделение
+        position: Должность
+        position_id: Должность
+        actual_position: Фактическая должность
+        birth_date: Дата рождения
+        email: Email
+        first_name: Имя
+        last_name: Фамилия
+        middle_name: Отчество
+        password: Пароль
+        phone: Телефон
+        reset_token: Токен сброса пароля
+        role: Роль
+      user/role:
+        mortal: Простой работник
+        head: Начальник
+        deputy: Заместитель директора
+        director: Директор

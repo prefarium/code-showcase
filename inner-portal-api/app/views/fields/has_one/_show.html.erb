@@ -1,0 +1,17 @@
+<% if field.linkable? %>
+  <fieldset class="attribute--nested">
+    <legend>
+      <%= link_to(field.display_associated_resource, [namespace, field.data]) %>
+    </legend>
+    <% field.nested_show.attributes.each do |attribute| -%>
+      <div>
+        <dt class="attribute-label">
+          <%= t("activerecord.attributes.#{resource_name}.#{attribute.name}", default: attribute.name.titleize) %>
+        </dt>
+        <dd class="attribute-data attribute-data--<%= attribute.html_class %>">
+          <%= render_field attribute, { page: page } %>
+        </dd>
+      </div>
+    <% end -%>
+  </fieldset>
+<% end %>

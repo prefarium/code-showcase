@@ -1,0 +1,10 @@
+<dt class="attribute-label">
+  Изображение
+</dt>
+<dd class="attribute-data attribute-data--string">
+  <% if page.resource.file.attached? %>
+    <img src="<%= blob_url_for(page.resource.file) %>" alt="">
+  <% else %>
+    Отсутствует
+  <% end %>
+</dd>

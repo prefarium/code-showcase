@@ -1,0 +1,183 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - '**/bin/**/*'
+    - '**/db/schema.rb'
+    - '**/db/data_schema.rb'
+    - '**/.idea/**/*'
+    - '**/.git/**/*'
+    - '**/node_modules/**/*'
+    - '**/script/**/*'
+    - '**/tmp/**/*'
+    - '**/vendor/**/*'
+  TargetRubyVersion: 2.7.3
+  EnabledByDefault: true
+  NewCops: enable
+
+########## Layout ##########
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Layout/FirstHashElementLineBreak:
+  Enabled: false
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - '**/config/initializers/devise.rb'
+
+Layout/MultilineAssignmentLayout:
+  EnforcedStyle: same_line
+
+Layout/RedundantLineBreak:
+  Enabled: false
+
+########## Lint ##########
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - '**/spec/**/*'
+
+Lint/ConstantResolution:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/NumberConversion:
+  Enabled: false
+
+########## Metrics ##########
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - '**/config/**/*'
+    - '**/spec/**/*'
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+########## Metrics ##########
+
+Naming/FileName:
+  Exclude:
+    - '**/config/initializers/rswag-ui.rb'
+
+########## Style ##########
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/ConstantVisibility:
+  Enabled: false
+
+Style/Copyright:
+  Enabled: false
+
+Style/DisableCopsWithinSourceCodeDirective:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+
+Style/InlineComment:
+  Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+
+Style/MissingElse:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/UnlessLogicalOperators:
+  Enabled: false
+
+########## Bundler ##########
+
+Bundler/GemComment:
+  Enabled: false
+
+Bundler/GemVersion:
+  Enabled: false
+
+########## Rails ##########
+
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+
+Rails/OrderById:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+########## RSpec ##########
+
+RSpec/ContextWording:
+  Prefixes:
+    - for
+    - if
+    - unless
+    - when
+    - where
+    - with
+    - without
+    - где
+    - если
+    - и
+    - как
+    - когда
+    - которая
+    - которое
+    - которого
+    - которые
+    - которых
+    - который
+    - пока
+
+RSpec/DescribeClass:
+  Exclude:
+    - '**/spec/requests/**/*'
+
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - '**/spec/requests/**/*'
+
+RSpec/MultipleMemoizedHelpers:
+  Exclude:
+    - '**/spec/requests/**/*'
+
+RSpec/VariableDefinition:
+  Exclude:
+    - '**/spec/requests/**/*'
+
+RSpec/VariableName:
+  Exclude:
+    - '**/spec/requests/**/*'

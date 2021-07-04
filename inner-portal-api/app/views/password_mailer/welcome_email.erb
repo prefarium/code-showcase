@@ -1,0 +1,8 @@
+<p>Добро пожаловать на внутренний портал</p>
+<p>Логин: <%= @user.email %></p>
+<p>При входе на портал вам будет предложено создать новый пароль</p>
+<a href=<%= "#{ENV.fetch('BASE_URL')}/auth/new-password/#{@user.reset_token}" %>>
+  <button>
+    Войти
+  </button>
+</a>

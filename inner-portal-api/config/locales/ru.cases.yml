@@ -1,0 +1,7 @@
+ru:
+  cases:
+    day:
+      zero: дней
+      one: день
+      few: дня
+      other: дней
